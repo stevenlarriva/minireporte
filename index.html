@@ -1,17 +1,117 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>NotiEstudiantes - Microinformativo Estudiantil</title>
+  <meta charset="UTF-8" />
+  <title>NotiEstudiantes - Contenidos destacados</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; color: #333; }
-    header { background-color: #2b6ec0; color: white; padding: 20px; text-align: center; }
-    nav { background-color: #2b6ec0; padding: 10px; text-align: center; }
-    nav a { margin: 0 15px; color: white; text-decoration: none; font-weight: bold; }
-    section { padding: 20px; margin: 20px auto; max-width: 900px; background: white; border-radius: 8px; }
-    footer { background: #2b6ec0; color: white; text-align: center; padding: 10px; margin-top: 40px; }
-    h2 { color: #2b6ec0; }
-    ul { line-height: 1.6; }
+    :root {
+      --header-height: 100px;
+      --nav-height: 100px;
+      --submenu-height: 70px;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+      padding-top: calc(var(--header-height) + var(--nav-height) + var(--submenu-height));
+    }
+
+    header {
+      background-color: #2b6ec0;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: var(--header-height);
+      z-index: 1000;
+    }
+
+    nav {
+      background-color: #2b6ec0;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      color: white;
+      font-weight: bold;
+      position: fixed;
+      top: var(--header-height);
+      width: 100%;
+      height: var(--nav-height);
+      align-items: center;
+      z-index: 999;
+    }
+
+    .menu-selector {
+      cursor: pointer;
+      padding: 10px 20px;
+      border-bottom: 3px solid transparent;
+      user-select: none;
+    }
+
+    .menu-selector.active {
+      border-bottom: 3px solid #fff;
+    }
+
+    #submenu {
+      background-color: #f0f0f0;
+      padding: 5px;
+      text-align: center;
+      position: fixed;
+      top: calc(var(--header-height) + var(--nav-height));
+      width: 100%;
+      height: var(--submenu-height);
+      z-index: 998;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #submenu button {
+      background-color: #2b6ec0;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    #submenu button:hover {
+      background-color: #1f4f8a;
+    }
+
+    section {
+      padding: 15px 20px;
+      margin: 10px auto;
+      max-width: 900px;
+      border-radius: 8px;
+      background-color: #e0e0e0;
+      border: 1px solid transparent;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    section.active-menu {
+      background-color: #d0e7ff;
+      border-color: #2b6ec0;
+    }
+
+    h2 {
+      color: #2b6ec0;
+    }
+
+    footer {
+      background: #2b6ec0;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: 40px;
+    }
   </style>
 </head>
 <body>
@@ -20,53 +120,58 @@
       <img src="https://cdn-icons-png.flaticon.com/512/54/54481.png" alt="Lupa" style="width:30px; vertical-align:middle; margin-right:10px;">
       BAJO LA LUPA
     </h1>
-    <p>Portal MicroInformativo de las noticias más destacas</p>
+    <p style="margin: 0;">Portal MicroInformativo de las noticias más destacas</p>
   </header>
 
   <nav>
-    <a href="#investigacion">Investigación</a>
-    <a href="#equipo">Equipo</a>
-    <a href="#microinformativo">Microinformativo</a>
-    <a href="#reportajes">Reportajes</a>
+    <div id="menu1Selector" class="menu-selector active" onclick="selectMenu(1)">Micro Reportaje - Comunidad</div>
+    <div id="menu2Selector" class="menu-selector" onclick="selectMenu(2)">Mini Historia - SaludMental</div>
   </nav>
 
-  <section id="investigacion">
-    <h2>Investigación</h2>
-    <p>
-      Este proyecto nace como parte de la asignatura <strong>Producción Audiovisual</strong>, donde los estudiantes de la carrera de Ingeniería de Software asumieron el reto de investigar y comunicar problemáticas reales de la sociedad ecuatoriana, con un enfoque comunitario, social y humano.
-    </p>
-  
-    <p>
-      La actividad se estructuró mediante un proceso de <strong>observación, indagación local, guionización y producción audiovisual</strong> de cinco reportajes en diversos escenarios del país. Cada guion aborda una situación específica, con base en testimonios reales, registro visual en territorio y análisis contextual.
-    </p>
-  
-    <p>
-      Las temáticas investigadas incluyen: 
+  <div id="submenu">
+    <button onclick="goToSection('investigacion')">Investigación</button>
+    <button onclick="goToSection('equipo')">Equipo</button>
+    <button onclick="goToSection('microinformativo')">Microinformativo</button>
+    <button onclick="goToSection('reportajes')">Reportajes</button>
+  </div>
+  <!-- Contenido Menú 1 -->
+  <section id="investigacion_menu1" class="active-menu">
+  <h2>Investigación</h2>
+      <p>
+        Este proyecto nace como parte de la asignatura <strong>Producción Audiovisual</strong>, donde los estudiantes de la carrera de Ingeniería de Software asumieron el reto de investigar y comunicar problemáticas reales de la sociedad ecuatoriana, con un enfoque comunitario, social y humano.
+      </p>
+    
+      <p>
+        La actividad se estructuró mediante un proceso de <strong>observación, indagación local, guionización y producción audiovisual</strong> de cinco reportajes en diversos escenarios del país. Cada guion aborda una situación específica, con base en testimonios reales, registro visual en territorio y análisis contextual.
+      </p>
+    
+      <p>
+        Las temáticas investigadas incluyen: 
+        <ul>
+          <li>La falta de obras comunitarias en sectores populares.</li>
+          <li>El impacto de la temporada invernal en las escuelas rurales.</li>
+          <li>Casos de inseguridad como secuestros y asaltos en zonas urbanas.</li>
+          <li>Y un enfoque positivo sobre la vida barrial en Juan Montalvo, como ejemplo de comunidad organizada.</li>
+        </ul>
+      </p>
+      <p>
+        A través de esta producción, se buscó no solo informar, sino también generar conciencia ciudadana y promover el pensamiento crítico en torno a los desafíos y valores que marcan nuestra realidad cotidiana.
+      </p>
+  </section>
+
+  <section id="equipo_menu1" class="active-menu">
+  <h2>Equipo de Producción (Créditos)</h2>
       <ul>
-        <li>La falta de obras comunitarias en sectores populares.</li>
-        <li>El impacto de la temporada invernal en las escuelas rurales.</li>
-        <li>Casos de inseguridad como secuestros y asaltos en zonas urbanas.</li>
-        <li>Y un enfoque positivo sobre la vida barrial en Juan Montalvo, como ejemplo de comunidad organizada.</li>
+        <li><strong>Dirección:</strong> STEFANY TATIANA QUIÑONEZ RODRÍGUEZ y GENESIS CAROLINA PEÑA APOLO</li>
+        <li><strong>Guion:</strong> ERIC XAVIER LUCERO PANTOJA y CARLOS MANUEL SOLORZANO BERMEO</li>
+        <li><strong>Edición:</strong> ERIC XAVIER LUCERO PANTOJA y STEFANY TATIANA QUIÑONEZ RODRÍGUEZ </li>
+        <li><strong>Locución:</strong> CARLOS MANUEL SOLORZANO BERMEO y ERIC XAVIER LUCERO PANTOJA</li>
+        <li><strong>Diseño Web:</strong> GENESIS CAROLINA PEÑA APOLO y ERIC XAVIER LUCERO PANTOJA</li>
       </ul>
-    </p>
-    <p>
-      A través de esta producción, se buscó no solo informar, sino también generar conciencia ciudadana y promover el pensamiento crítico en torno a los desafíos y valores que marcan nuestra realidad cotidiana.
-    </p>
-  </section>
-
-  <section id="equipo">
-    <h2>Equipo de Producción (Créditos)</h2>
-    <ul>
-      <li><strong>Dirección:</strong> STEFANY TATIANA QUIÑONEZ RODRÍGUEZ y GENESIS CAROLINA PEÑA APOLO</li>
-      <li><strong>Guion:</strong> ERIC XAVIER LUCERO PANTOJA y CARLOS MANUEL SOLORZANO BERMEO</li>
-      <li><strong>Edición:</strong> ERIC XAVIER LUCERO PANTOJA y STEFANY TATIANA QUIÑONEZ RODRÍGUEZ </li>
-      <li><strong>Locución:</strong> CARLOS MANUEL SOLORZANO BERMEO y ERIC XAVIER LUCERO PANTOJA</li>
-      <li><strong>Diseño Web:</strong> GENESIS CAROLINA PEÑA APOLO y ERIC XAVIER LUCERO PANTOJA</li>
-    </ul>
 
   </section>
 
-  <section id="microinformativo">
+  <section id="microinformativo_menu1" class="active-menu">
     <h2>Microinformativo</h2>
     <h3>🎙️ Boletín Informativo Estudiantil – Titulares de la Semana</h3>
   
@@ -88,10 +193,9 @@
     <p>
       Este microinformativo busca visibilizar realidades que muchas veces no llegan a los grandes medios, promoviendo una ciudadanía informada y participativa.
     </p>
-    </section>
-  
+  </section>
 
-  <section id="reportajes">
+  <section id="reportajes_menu1" class="active-menu">
     <h2>Reportajes</h2>
     <p>Hoy te presentamos un reportaje donde se reflejan la realidad de nuestras comunidades y el compromiso del periodismo estudiantil por informar con responsabilidad:</p>
     <ul>
@@ -105,8 +209,90 @@
     <iframe width="100%" height="400" src="https://www.youtube.com/embed/avsfZImxJVg" title="Reportaje IA y Educación" frameborder="0" allowfullscreen></iframe>
   </section>
 
+  <!-- Contenido Menú 2 -->
+  <section id="investigacion_menu2">
+    <h2>Investigación</h2>
+    <h3>IDEA PRINCIPAL</h3>
+    <p>
+      Este video fue creado como parte de la materia de Producción Audiovisual, con el objetivo de aplicar lo aprendido en clase y generar contenido de valor para plataformas digitales, como YouTube.
+      Escogimos el tema de la salud mental porque consideramos que es una necesidad urgente y relevante en la sociedad actual. A través de este video queremos ofrecer consejos simples y útiles que ayuden a las personas a mejorar su bienestar emocional desde casa.
+      Como cada integrante del grupo vive en una ciudad diferente, decidimos trabajar con un formato colaborativo tipo blog, donde cada uno grabó su parte desde su entorno personal. Esto resolvió la dificultad de la distancia y además enriqueció el video con distintas perspectivas.
+      Cada uno aportó un consejo diferente sobre el cuidado de la salud mental, y el resultado es un video breve, reflexivo y con un mensaje final positivo e inspirador para quien lo vea.
+    </p>
+  </section>
+
+  <section id="equipo_menu2">
+    <h2>Equipo de Producción (Créditos)</h2>
+        <ul>
+          <li><strong>Dirección:</strong> STEFANY TATIANA QUIÑONEZ RODRÍGUEZ y GENESIS CAROLINA PEÑA APOLO</li>
+          <li><strong>Guion:</strong> CARLOS MANUEL SOLORZANO BERMEO</li>
+          <li><strong>Edición:</strong>  STEFANY TATIANA QUIÑONEZ RODRÍGUEZ </li>
+          <li><strong>Locución:</strong> CARLOS MANUEL SOLORZANO BERMEO </li>
+          <li><strong>Diseño Web:</strong> GENESIS CAROLINA PEÑA APOLO </li>
+        </ul>
+  </section>
+
+  <section id="microinformativo_menu2">
+    <h2>Microinformativo</h2>
+    <h3>🎙️ Video sobre Salud Mental – Lo que se informa</h3>
+    <p>Este video, realizado para el proyecto de Producción Audiovisual, informa sobre:</p>
+    <ul>
+      <li><strong>Propósito educativo:</strong> Aplicar los conocimientos adquiridos en clase para crear contenido útil en plataformas digitales como YouTube.</li>
+      <li><strong>Tema central:</strong> La salud mental, por su relevancia social y urgencia en la actualidad.</li>
+      <li><strong>Consejos prácticos:</strong> Se ofrecen recomendaciones simples para mejorar el bienestar emocional desde casa.</li>
+      <li><strong>Mensaje final:</strong> Un cierre positivo e inspirador que promueve el autocuidado y el bienestar emocional.</li>
+    </ul>
+  </section>
+
+  <section id="reportajes_menu2">
+    <h2>Reportajes</h2>
+    <p>Hoy te presentamos un reportaje que destaca la importancia del cuidado de la salud mental y cómo un grupo de estudiantes aborda este tema desde diferentes ciudades para ofrecer consejos prácticos:</p>
+    <ul>
+      <li><strong>Propósito educativo:</strong> Estudiantes aplican conocimientos de Producción Audiovisual para crear contenido valioso en plataformas digitales.</li>
+      <li><strong>Tema de relevancia social:</strong> La salud mental es presentada como una necesidad urgente en la sociedad actual.</li>
+      <li><strong>Trabajo colaborativo:</strong> Cada integrante grabó desde su entorno personal, aportando diversas perspectivas en un formato tipo blog.</li>
+      <li><strong>Consejos prácticos:</strong> Se comparten recomendaciones simples para mejorar el bienestar emocional desde casa.</li>
+      <li><strong>Mensaje final:</strong> El video concluye con un mensaje positivo e inspirador que fomenta el autocuidado y la salud emocional.</li>
+    </ul>
+    <h3>🎥 Video Reportaje</h3>
+    <iframe width="100%" height="400" src="https://www.youtube.com/embed/rTeid6M6Y-0" title="Historia" frameborder="0" allowfullscreen></iframe>
+  </section>
+
   <footer>
     <p>&copy; 2025 NotiEstudiantes - Proyecto Académico</p>
   </footer>
+
+  <script>
+    let currentMenu = 1;
+
+    function selectMenu(menuNumber) {
+      if (currentMenu === menuNumber) return;
+      currentMenu = menuNumber;
+
+      document.getElementById('menu1Selector').classList.toggle('active', menuNumber === 1);
+      document.getElementById('menu2Selector').classList.toggle('active', menuNumber === 2);
+
+      const menu1Sections = document.querySelectorAll('[id$="_menu1"]');
+      const menu2Sections = document.querySelectorAll('[id$="_menu2"]');
+
+      if (menuNumber === 1) {
+        menu1Sections.forEach(sec => sec.classList.add('active-menu'));
+        menu2Sections.forEach(sec => sec.classList.remove('active-menu'));
+        document.getElementById('investigacion_menu1').scrollIntoView({ behavior: 'smooth' });
+      } else {
+        menu2Sections.forEach(sec => sec.classList.add('active-menu'));
+        menu1Sections.forEach(sec => sec.classList.remove('active-menu'));
+        document.getElementById('investigacion_menu2').scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function goToSection(baseId) {
+      const sectionId = `${baseId}_menu${currentMenu}`;
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  </script>
 </body>
 </html>
